@@ -31,8 +31,9 @@ const createUser = async (req, res) => {
 
 const addToFav = async (req, res) => {
     let email = req.params.email;
-    let favFruit = req.body;
+    let favFruitId = req.params.id;
     let userData = await userModel.findOne({ email });
+    let favFruit = await fruitModel.findOne({ favFruitId })
     userData.favFruits.push(favFruit);
     userData.save();
     res.status(200).json(userData);
