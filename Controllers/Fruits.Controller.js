@@ -24,9 +24,15 @@ const getFruitData = async (req, res) => {
 
 const createUser = async (req, res) => {
     let email = req.params.email;
-    let user = new userModel({ email });
-    user.save();
-    res.status(201).json(`${email} Created`);
+    let checkEmail = await userModel.exists({ email })
+    if (checkEmail) {
+        res.status(200).send("account is existed ");
+    } else {
+        let user = new userModel({ email });
+        user.save();
+        res.status(201).json(`${email} Created`);
+    }
+
 }
 
 const addToFav = async (req, res) => {
