@@ -4,7 +4,7 @@ const axios = require('axios');
 const { fruitModel, userModel } = require('../Models/Fruits.Model');
 
 const seedFruitsData = async () => {
-    let url = 'https://fruit-api-301.herokuapp.com/getFruit'
+    let url = 'https://fruit-api-301.herokuapp.com/getFruit';
     let fruitsData = await axios.get(url);
 
     let cleanData = fruitsData.data.fruits.map(elem => {
@@ -71,7 +71,7 @@ const updateFav = async (req, res) => {
     let fruitItem = req.body;
     let userData = await userModel.findOne({ email: email });
     userData.favFruits.map(elem => {
-        if (elem._id === fruitId) {
+        if (elem._id.toString() === fruitId) {
             elem.name = fruitItem.name;
             elem.image = fruitItem.image;
             elem.price = fruitItem.price;
@@ -80,8 +80,6 @@ const updateFav = async (req, res) => {
     userData.save();
     res.status(200).json(userData);
 }
-
-
 
 module.exports = {
     seedFruitsData,
