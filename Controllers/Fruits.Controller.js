@@ -55,9 +55,7 @@ const deleteFav = async (req, res) => {
     let fruitId = req.params.fruitId;
     let userData = await userModel.findOne({ email: email });
     userData.favFruits.map((elem, index) => {
-        console.log(fruitId)
-        console.log(elem._id)
-        if (elem._id.toString() === fruitId) {
+        if (elem._id.toString() === fruitId.toString()) {
             userData.favFruits.splice(index, 1);
         }
     });
@@ -71,7 +69,7 @@ const updateFav = async (req, res) => {
     let fruitItem = req.body;
     let userData = await userModel.findOne({ email: email });
     userData.favFruits.map(elem => {
-        if (elem._id.toString() === fruitId) {
+        if (elem._id.toString() === fruitId.toString()) {
             elem.name = fruitItem.name;
             elem.image = fruitItem.image;
             elem.price = fruitItem.price;
