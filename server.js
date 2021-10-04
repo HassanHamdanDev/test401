@@ -15,6 +15,7 @@ const {
     seedFruitsData,
     getFruitData,
     createUser,
+    getUser,
     addToFav,
     deleteFav,
     updateFav
@@ -27,6 +28,7 @@ server.get('/', (req, res) => { res.status(200).json({ massage: "I Am Working" }
 server.get('/setData', seedFruitsData);
 server.get('/getData', getFruitData);
 server.post('/creatUser/:email', createUser);
+server.get('/getUser/:email', getUser);
 server.put('/addToFav/:email/:favFruitId', addToFav);
 server.delete('/deleteFav/:email/:fruitId', deleteFav);
 server.put('/updateFav/:email/:fruitId', updateFav);

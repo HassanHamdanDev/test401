@@ -34,6 +34,12 @@ const createUser = async (req, res) => {
     }
 }
 
+const getUser = async (req, res) => {
+    let email = req.params.email;
+    let userData = await userModel.findOne({ email });
+    res.status(200).json(userData);
+}
+
 const addToFav = async (req, res) => {
     let email = req.params.email;
     let favFruitId = req.params.favFruitId;
@@ -77,6 +83,7 @@ module.exports = {
     seedFruitsData,
     getFruitData,
     createUser,
+    getUser,
     addToFav,
     deleteFav,
     updateFav,
